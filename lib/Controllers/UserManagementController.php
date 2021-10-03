@@ -13,17 +13,17 @@ class UserManagementController extends Controller
 
     public function getPageAllUsers()
     {
-        return view('user-management-module::allUsers');
+        return view('user-management-module::user.allUsers');
     }
 
     public function getPageAddUser()
     {
-        return view('user-management-module::addNewUser');
+        return view('user-management-module::user.addNewUser');
     }
 
     public function getPageUserInfo()
     {
-        return view('user-management-module::userInfo');
+        return view('user-management-module::user.userInfo');
     }
 
     public function addUser()

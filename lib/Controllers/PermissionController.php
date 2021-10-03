@@ -13,17 +13,17 @@ class PermissionController extends Controller
 
     public function getPageAllPermissions()
     {
-        return view('user-management-module::allPermissions');
+        return view('user-management-module::permission.allPermissions');
     }
 
     public function getPageAddPermission()
     {
-        return view('user-management-module::addPermission');
+        return view('user-management-module::permission.addPermission');
     }
 
     public function getPageEditPermission()
     {
-        return view('user-management-module::editPermission');
+        return view('user-management-module::permission.editPermission');
     }
 
     public function addPermission()

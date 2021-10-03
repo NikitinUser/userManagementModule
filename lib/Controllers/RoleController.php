@@ -13,17 +13,17 @@ class RoleController extends Controller
 
     public function getPageAllRoles()
     {
-        return view('user-management-module::allRoles');
+        return view('user-management-module::role.allRoles');
     }
 
     public function getPageAddRole()
     {
-        return view('user-management-module::addRole');
+        return view('user-management-module::role.addRole');
     }
 
     public function getPageEditRole()
     {
-        return view('user-management-module::editRole');
+        return view('user-management-module::role.editRole');
     }
 
     public function addRole()
