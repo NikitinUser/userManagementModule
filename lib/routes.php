@@ -38,4 +38,4 @@ Route::get('/getPageEditPermission', [UsersController::class, 'getPageEditPermis
 
 Route::post('addPermission', [UsersController::class, 'addPermission'])->middleware('web');
 Route::post('editPermission', [UsersController::class, 'editPermission'])->middleware('web');
-Route::post('daletePermission', [UsersController::class, 'daletePermission'])->middleware('web');
+Route::post('deletePermission', [UsersController::class, 'deletePermission'])->middleware('web');
