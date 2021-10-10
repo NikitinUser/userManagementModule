@@ -1,5 +1,5 @@
 <?php 
-namespace NikitinUser\usersCMSPrototype\lib\Models;
+namespace NikitinUser\userManagementModule\lib\Models;
 
 class UserManagement
 {
