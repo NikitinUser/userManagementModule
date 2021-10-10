@@ -1,7 +1,9 @@
 <?php 
-namespace NikitinUser\usersCMSPrototype\lib\Models;
+namespace NikitinUser\userManagementModule\lib\Models;
 
-class Permission
+use Illuminate\Database\Eloquent\Model;
+
+class Permission extends Model
 {
-
+    protected $table = 'permissions';
 }

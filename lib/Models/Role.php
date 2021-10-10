@@ -1,7 +1,9 @@
 <?php 
-namespace NikitinUser\usersCMSPrototype\lib\Models;
+namespace NikitinUser\userManagementModule\lib\Models;
 
-class Role
+use Illuminate\Database\Eloquent\Model;
+
+class Role extends Model
 {
-
+    protected $table = 'roles';
 }
