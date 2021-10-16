@@ -26,9 +26,10 @@ Route::get('/getPageEditRole', [RoleController::class, 'getPageEditRole'])->name
 
 Route::post('addRole', [RoleController::class, 'addRole'])->middleware('web');
 Route::post('editRole', [RoleController::class, 'editRole'])->middleware('web');
-Route::post('daleteRole', [RoleController::class, 'daleteRole'])->middleware('web');
+Route::post('deleteRole', [RoleController::class, 'deleteRole'])->middleware('web');
 
-Route::post('changePermissionRole', [RoleController::class, 'changePermissionRole'])->middleware('web');
+Route::post('onPermissionRole', [RoleController::class, 'addPermissionForRole'])->middleware('web');
+Route::post('offPermissionRole', [RoleController::class, 'removePermissionForRole'])->middleware('web');
 
 
  /**
