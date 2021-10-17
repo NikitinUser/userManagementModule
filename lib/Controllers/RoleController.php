@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use NikitinUser\userManagementModule\lib\Models\PermissionsForRole;
+use NikitinUser\userManagementModule\lib\Models\RolesForUser;
 use NikitinUser\userManagementModule\lib\Models\Role;
 
 class RoleController extends Controller
@@ -23,7 +24,16 @@ class RoleController extends Controller
         $data = $pfr->getAllRolesAndPermissions();
         //dd($data);
         
-        return view('user-management-module::role.allRoles', compact('data'));
+        return view('user-management-module::role.rolesAndPermissions', compact('data'));
+    }
+
+    public function getPageUsersRoles()
+    {
+        $pfr = new RolesForUser();
+        $data = $pfr->getAllUsersAndRoles();
+        //dd($data);
+
+        return view('user-management-module::role.usersRoles', compact('data'));
     }
 
     public function getPageAddRole()
@@ -31,9 +41,13 @@ class RoleController extends Controller
         return view('user-management-module::role.addRole');
     }
 
-    public function getPageEditRole()
+    public function getPageEditRole(Request $request)
     {
-        return view('user-management-module::role.editRole');
+        $idRole = $request->input("role_id");
+        
+        $data = $this->role->getRole($idRole);
+
+        return view('user-management-module::role.editRole', compact('data'));
     }
 
     public function addRole(Request $request)
@@ -45,9 +59,14 @@ class RoleController extends Controller
         return redirect(route("getPageAllRoles"));
     }
 
-    public function editRole()
+    public function editRole(Request $request)
     {
-        
+        $idRole = $request->input("role_id");
+        $name_role = $request->input("role_name");
+
+        $this->role->updateRole($idRole, $name_role);
+
+        return redirect(route("getPageAllRoles"));
     }
 
     public function deleteRole(Request $request)
