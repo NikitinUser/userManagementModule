@@ -16,4 +16,11 @@ class RoleService
     {
         return $this->role->get();
     }
+
+    public function getRoleById(int $id)
+    {
+        return $this->role
+            ->where("id", $id)
+            ->get();
+    }
 }

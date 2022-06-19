@@ -20,14 +20,6 @@ class Role extends Model
              ->toArray();
     }
 
-    public function getRole($idRole)
-    {
-        return $this->select()
-             ->where("id", $idRole)
-             ->get()
-             ->toArray();
-    }
-
     public function updateRole($idRole, $name_role)
     {
         $this->where('id', $idRole)

@@ -23,11 +23,16 @@ class PermissionController extends Controller
 
     public function getPageEditPermission(Request $request)
     {
-        $idPermission = (int)$request->input("permission_id");
-
-        $data = $this->permissionService->getPermissionById($idPermission);
+        $data = $this->getPermissionData($request);
 
         return view('user-management-module::permission.editPermission', compact('data'));
+    }
+
+    public function getPermissionData(Request $request)
+    {
+        $idPermission = (int)$request->input("permission_id");
+
+        return $this->permissionService->getPermissionById($idPermission);
     }
 
     public function addPermission(Request $request)

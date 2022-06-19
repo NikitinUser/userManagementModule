@@ -4,7 +4,7 @@
 <div class="row me-5 ms-5">
     <div class="card col-md-12 p-3 justify-content-center">
         <div class="d-flex">
-            <div class="mb-3 mr-3">
+            <div class="mb-3 me-3">
                 <a href="getPageAddRole" class="btn btn-primary">Добавить роль</a>
             </div>
             <div class="mb-3">
