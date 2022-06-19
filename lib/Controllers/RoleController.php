@@ -8,6 +8,9 @@ use NikitinUser\userManagementModule\lib\Models\PermissionsForRole;
 use NikitinUser\userManagementModule\lib\Models\RolesForUser;
 use NikitinUser\userManagementModule\lib\Models\Role;
 
+use NikitinUser\userManagementModule\lib\Services\RolesPermissionsService;
+use NikitinUser\userManagementModule\lib\Services\RoleService;
+
 class RoleController extends Controller
 {
     private $role;
@@ -18,13 +21,16 @@ class RoleController extends Controller
         $this->role = $role;
     }
 
-    public function getPageAllRoles()
+    public function getPageAllRolesAndPermissions()
     {
-        $pfr = new PermissionsForRole();
-        $data = $pfr->getAllRolesAndPermissions();
-        //dd($data);
-        
+        $data = $this->getAllRolesAndPermission();
         return view('user-management-module::role.rolesAndPermissions', compact('data'));
+    }
+
+    public function getAllRolesAndPermission()
+    {
+        $service = new RolesPermissionsService();
+        return $service->getPermissionsAndRoles();
     }
 
     public function getPageUsersRoles()
@@ -43,11 +49,18 @@ class RoleController extends Controller
 
     public function getPageEditRole(Request $request)
     {
-        $idRole = $request->input("role_id");
-        
-        $data = $this->role->getRole($idRole);
+        $data = $this->getRoleData($request);
 
         return view('user-management-module::role.editRole', compact('data'));
+    }
+
+    public function getRoleData(Request $request)
+    {
+        $roleService = new RoleService();
+
+        $idRole = (int)$request->input("role_id");
+        
+        return $roleService->getRoleById($idRole);
     }
 
     public function addRole(Request $request)

@@ -4,16 +4,16 @@ namespace NikitinUser\userManagementModule\lib\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use NikitinUser\userManagementModule\lib\Models\Permission;
+use NikitinUser\userManagementModule\lib\Services\PermissionService;
 
 class PermissionController extends Controller
 {
-    private $permission;
+    private PermissionService $permissionService;
 
-    public function __construct(Permission $permission)
+    public function __construct()
     {
         $this->middleware('auth');
-        $this->permission = $permission;
+        $this->permissionService = new PermissionService();
     }
 
     public function getPageAddPermission()
@@ -23,28 +23,33 @@ class PermissionController extends Controller
 
     public function getPageEditPermission(Request $request)
     {
-        $idPermission = $request->input("permission_id");
-
-        $data = $this->permission->getPermission($idPermission);
+        $data = $this->getPermissionData($request);
 
         return view('user-management-module::permission.editPermission', compact('data'));
+    }
+
+    public function getPermissionData(Request $request)
+    {
+        $idPermission = (int)$request->input("permission_id");
+
+        return $this->permissionService->getPermissionById($idPermission);
     }
 
     public function addPermission(Request $request)
     {
         $data = [];
         $data['permission_name'] = $request?->input('permission_name');
-        $this->permission->addPermission($data);
+        $this->permissionService->addPermission($data);
 
         return redirect(route("getPageAllRoles"));
     }
 
     public function editPermission(Request $request)
     {
-        $idPermission = $request->input("permission_id");
-        $name_permission = $request->input("permission_name");
+        $idPermission = (int)$request->input("permission_id");
+        $namePermission = $request->input("permission_name");
 
-        $this->permission->updatePermission($idPermission, $name_permission);
+        $this->permissionService->updatePermissionNameById($idPermission, $namePermission);
 
         return redirect(route("getPageAllRoles"));
     }
@@ -52,7 +57,7 @@ class PermissionController extends Controller
     public function deletePermission(Request $request)
     {
         $idPermission = $request->input("id_permission") ?? 0;
-        $this->permission->deletePermission($idPermission);
+        $this->permissionService->deletePermission($idPermission);
 
         return true;
     }
