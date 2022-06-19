@@ -8,6 +8,8 @@ use NikitinUser\userManagementModule\lib\Models\PermissionsForRole;
 use NikitinUser\userManagementModule\lib\Models\RolesForUser;
 use NikitinUser\userManagementModule\lib\Models\Role;
 
+use NikitinUser\userManagementModule\lib\Services\RolesPermissionsService;
+
 class RoleController extends Controller
 {
     private $role;
@@ -18,13 +20,17 @@ class RoleController extends Controller
         $this->role = $role;
     }
 
-    public function getPageAllRoles()
+    public function getPageAllRolesAndPermissions()
     {
-        $pfr = new PermissionsForRole();
-        $data = $pfr->getAllRolesAndPermissions();
+        $data = $this->getAllRolesAndPermission();
         //dd($data);
-        
         return view('user-management-module::role.rolesAndPermissions', compact('data'));
+    }
+
+    public function getAllRolesAndPermission()
+    {
+        $service = new RolesPermissionsService();
+        return $service->getPermissionsAndRoles();
     }
 
     public function getPageUsersRoles()

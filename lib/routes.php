@@ -19,7 +19,9 @@ Route::post('offUserRole', [UserManagementController::class, 'removeRoleForUser'
  /**
  * Roles
  */
-Route::get('/getPageAllRoles', [RoleController::class, 'getPageAllRoles'])->name('getPageAllRoles')->middleware('web');
+Route::get('/getPageAllRoles', [RoleController::class, 'getPageAllRolesAndPermissions'])
+    ->name('getPageAllRoles')
+    ->middleware('web');
 Route::get('/getPageUsersRoles', [RoleController::class, 'getPageUsersRoles'])->name('getPageUsersRoles')->middleware('web');
 Route::get('/getPageAddRole', [RoleController::class, 'getPageAddRole'])->name('getPageAddRole')->middleware('web');
 Route::get('/getPageEditRole', [RoleController::class, 'getPageEditRole'])->name('getPageEditRole')->middleware('web');

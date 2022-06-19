@@ -1,67 +1,58 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="d-flex">
-                    <div class="mb-3 mr-3">
-                        <a href="getPageAddRole" class="btn btn-primary">Добавить роль</a>
-                    </div>
-                    <div class="mb-3">
-                        <a href="getPageAddPermission" class="btn btn-primary">Добавить право</a>
-                    </div>
-                </div>
-                
-
-                <table class="table table-striped">
-                    <th style="width: 150px; !important">Роли\Права</th>
-
-                    @foreach ($data['permissions'] as $key => $value)
-                        <th style="width: 100px; !important"> 
-                            <a href="getPageEditPermission?permission_id={{ $value['id'] ?? '0' }}">{{ $value['permission_name'] ?? "-" }}</a>
-                        </th>
-                    @endforeach
-                    
-                    @foreach ($data['roles'] as $key => $value)
-
-                        <tr>
-
-                            <td>
-                                <a href="getPageEditRole?role_id={{$value['id'] ?? '0'}}">{{ $value['role_name'] ?? "-" }}</a>
-                            </td>
-
-                            @foreach ($value['status'] as $key => $val)
-                                <td>
-                                    @if ($val == 1)
-                                    <form>
-                                        <div class="custom-control custom-switch">
-                                            <input class="custom-control-input" type="checkbox" 
-                                                    onclick="switchPermission(this)"
-                                                    id="role_permis_{{$value['id']}}_{{$key}}" 
-                                                    checked>
-                                            <label class="custom-control-label" for="role_permis_{{$value['id']}}_{{$key}}"></label>
-                                        </div>
-                                    </form>
-                                    @else
-                                    <form>
-                                        <div class="custom-control custom-switch">
-                                            <input class="custom-control-input" type="checkbox" 
-                                                    onclick="switchPermission(this)"
-                                                    id="role_permis_{{$value['id']}}_{{$key}}">
-                                            <label class="custom-control-label" for="role_permis_{{$value['id']}}_{{$key}}"></label>
-                                        </div>
-                                    </form>    
-                                    @endif
-                                </td>
-                            @endforeach
-                        </tr>
-                        
-                    @endforeach
-                </table>
+<div class="row me-5 ms-5">
+    <div class="card col-md-12 p-3 justify-content-center">
+        <div class="d-flex">
+            <div class="mb-3 mr-3">
+                <a href="getPageAddRole" class="btn btn-primary">Добавить роль</a>
+            </div>
+            <div class="mb-3">
+                <a href="getPageAddPermission" class="btn btn-primary">Добавить право</a>
             </div>
         </div>
+        
+
+        <table class="table table-striped" id="roles-permissions-table">
+            <th style="width: 150px; !important">Роли\Права</th>
+            @foreach ($data['permissions'] as $key => $value)
+                <th style="width: 100px; !important"> 
+                    <a href="getPageEditPermission?permission_id={{ $value?->id}}">{{ $value?->permission_name}}</a>
+                </th>
+            @endforeach
+
+            @foreach ($data['roles'] as $key => $role)
+                <tr>
+                    <td>
+                        <a href="getPageEditRole?role_id={{$role?->id}}">{{ $role->role_name}}</a>
+                    </td>
+
+                    @foreach ($data['permissions'] as $key => $permission)
+                        @php
+                            $checked = false;
+                        @endphp
+
+                        @foreach ($data['rolesAndPermissions'] as $permissionRoles)
+                            @if ($permissionRoles['role_id'] == $role->id && $permissionRoles['permis_id'] == $permission->id)
+                                @php
+                                    $checked = true;
+                                @endphp
+                            @endif
+                        @endforeach
+
+                        <td>
+                            <div class="custom-control custom-switch">
+                                <input class="custom-control-input" type="checkbox" 
+                                        onclick="switchPermission(this)"
+                                        id="role_permis_{{$role->id}}_{{$permission->id}}" 
+                                        @if ($checked) checked @endif>
+                                <label class="custom-control-label" for="role_permis_{{$role->id}}_{{$permission->id}}"></label>
+                            </div>
+                        </td>
+                    @endforeach
+                </tr>
+            @endforeach
+        </table>
     </div>
 </div>
 
@@ -96,5 +87,4 @@
 		});
     }
 </script>
-
 @endsection
