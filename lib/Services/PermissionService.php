@@ -27,22 +27,19 @@ class PermissionService
 
     public function addPermission($permissionData)
     {
-        $this->permission->insert($permissionData);
+        return $this->permission->create($permissionData);
     }
 
     public function updatePermissionNameById(int $idPermission, string $namePermission)
     {
-        $this->where('id', $idPermission)
+        $this->permission->where('id', $idPermission)
             ->update(['permission_name' => $namePermission]);
     }
 
 
     public function deletePermission(int $idPermission)
     {
-        // DB::table('permissions_for_role')
-        //         ->where('id_permission', '=', $idPermission)
-        //         ->delete();
-
-        // $this->where('id', $idPermission)->delete();
+        $this->permission->where('id', $idPermission)
+            ->delete();
     }
 }

@@ -2,7 +2,6 @@
 namespace NikitinUser\userManagementModule\lib\Services;
 
 use NikitinUser\userManagementModule\lib\Models\PermissionsForRole;
-
 use NikitinUser\userManagementModule\lib\Services\PermissionService;
 use NikitinUser\userManagementModule\lib\Services\RoleService;
 
@@ -32,5 +31,20 @@ class RolesPermissionsService
         ];
 
         return $response;
+    }
+
+    public function addPermissionForRole(int $roleId, int $permissionId)
+    {
+        $this->permissionsRoles->create([
+            'id_role' => $roleId,
+            'id_permission' => $permissionId
+        ]);
+    }
+
+    public function removePermissionForRole(int $roleId, int $permissionId)
+    {
+        $this->permissionsRoles->where('id_role', '=', $roleId)
+            ->where('id_permission', '=', $permissionId)
+            ->delete();
     }
 }

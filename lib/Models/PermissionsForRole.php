@@ -7,6 +7,11 @@ class PermissionsForRole extends Model
 {
     protected $table = 'permissions_for_role';
 
+    protected $fillable = [
+        'id_role',
+        'id_permission',
+    ];
+
     public function getAllPermissionsForRoles()
     {
         $columnsRolesAndPermissions = [
@@ -21,22 +26,5 @@ class PermissionsForRole extends Model
             ->get()
             ->toArray();
         return $response;
-    }
-
-    
-
-    public function addPermissionForRole($role_id, $permission_id)
-    {
-        $this->insert([
-            'id_role' => $role_id,
-            'id_permission' => $permission_id
-        ]);
-    }
-
-    public function removePermissionForRole($role_id, $permission_id)
-    {
-        $this->where('id_role', '=', $role_id)
-             ->where('id_permission', '=', $permission_id)
-             ->delete();
     }
 }
