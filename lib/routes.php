@@ -8,7 +8,6 @@ use NikitinUser\userManagementModule\lib\Controllers\UserManagementController;
  * Users
  */
 Route::get('/getPageAllUsers', [UserManagementController::class, 'getPageAllUsers'])->name('getPageAllUsers')->middleware('web');
-Route::get('/getPageAddNewUser', [UserManagementController::class, 'getPageAddNewUser'])->name('getPageAddNewUser')->middleware('web');
 
 Route::post('removeUser', [UserManagementController::class, 'removeUser'])->middleware('web');
 
@@ -19,8 +18,8 @@ Route::post('offUserRole', [UserManagementController::class, 'removeRoleForUser'
  /**
  * Roles
  */
-Route::get('/getPageAllRoles', [RoleController::class, 'getPageAllRolesAndPermissions'])
-    ->name('getPageAllRoles')
+Route::get('/getPageAllRolesAndPermissions', [PermissionController::class, 'getPageAllRolesAndPermissions'])
+    ->name('getPageAllRolesAndPermissions')
     ->middleware('web');
 Route::get('/getPageUsersRoles', [RoleController::class, 'getPageUsersRoles'])->name('getPageUsersRoles')->middleware('web');
 Route::get('/getPageAddRole', [RoleController::class, 'getPageAddRole'])->name('getPageAddRole')->middleware('web');
@@ -30,8 +29,8 @@ Route::post('addRole', [RoleController::class, 'addRole'])->middleware('web');
 Route::post('editRole', [RoleController::class, 'editRole'])->middleware('web');
 Route::post('deleteRole', [RoleController::class, 'deleteRole'])->middleware('web');
 
-Route::post('onPermissionRole', [RoleController::class, 'addPermissionForRole'])->middleware('web');
-Route::post('offPermissionRole', [RoleController::class, 'removePermissionForRole'])->middleware('web');
+Route::post('onPermissionRole', [PermissionController::class, 'addPermissionForRole'])->middleware('web');
+Route::post('offPermissionRole', [PermissionController::class, 'removePermissionForRole'])->middleware('web');
 
 
  /**
