@@ -65,9 +65,6 @@
 		   }), 
 		  body: params,
 		})
-		.then((response) => {
-		    return response.json();
-		})
 		.then((data) => {
 			window.location.reload();
 		});

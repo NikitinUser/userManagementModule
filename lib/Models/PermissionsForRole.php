@@ -12,7 +12,7 @@ class PermissionsForRole extends Model
         'id_permission',
     ];
 
-    public function getAllPermissionsForRoles()
+    public function getAllPermissionsForRoles(): array
     {
         $columnsRolesAndPermissions = [
             'permissions_for_role.id as id',

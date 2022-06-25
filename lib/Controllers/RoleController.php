@@ -13,7 +13,7 @@ class RoleController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('role:admin');
         $this->roleService = new RoleService();
         $this->userService = new UserService();
     }
@@ -38,9 +38,9 @@ class RoleController extends Controller
 
     public function getPageEditRole(Request $request)
     {
-        $data = $this->getRoleData($request);
+        $role = $this->getRoleData($request);
 
-        return view('user-management-module::role.editRole', compact('data'));
+        return view('user-management-module::role.editRole', compact('role'));
     }
 
     public function getRoleData(Request $request)
@@ -52,9 +52,8 @@ class RoleController extends Controller
 
     public function addRole(Request $request)
     {
-        $data = [];
-        $data['role_name'] = $request?->input('role_name');
-        $role = $this->roleService->addRole($data);
+        $roleData = $request->all();
+        $role = $this->roleService->addRole($roleData);
 
         return json_encode($role);
     }
@@ -69,7 +68,7 @@ class RoleController extends Controller
 
     public function deleteRole(Request $request)
     {
-        $roleId = $request->input("id_role") ?? 0;
+        $roleId = (int)$request?->input("role_id");
         $this->roleService->deleteRole($roleId);
     }
 }

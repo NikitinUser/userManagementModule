@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use NikitinUser\userManagementModule\lib\Services\PermissionService;
 use NikitinUser\userManagementModule\lib\Services\RolesPermissionsService;
+use Illuminate\Support\Facades\Log;
 
 class PermissionController extends Controller
 {
@@ -13,7 +14,7 @@ class PermissionController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('role:admin');
         $this->permissionService = new PermissionService();
         $this->rolePermissionService = new RolesPermissionsService();
     }
@@ -36,9 +37,9 @@ class PermissionController extends Controller
 
     public function getPageEditPermission(Request $request)
     {
-        $data = $this->getPermissionData($request);
+        $permission = $this->getPermissionData($request);
 
-        return view('user-management-module::permission.editPermission', compact('data'));
+        return view('user-management-module::permission.editPermission', compact('permission'));
     }
 
     public function getPermissionData(Request $request)
@@ -50,9 +51,8 @@ class PermissionController extends Controller
 
     public function addPermission(Request $request)
     {
-        $data = [];
-        $data['permission_name'] = $request?->input('permission_name');
-        $permission = $this->permissionService->addPermission($data);
+        $permissionData = $request->all();
+        $permission = $this->permissionService->addPermission($permissionData);
 
         return json_encode($permission);
     }
@@ -67,22 +67,22 @@ class PermissionController extends Controller
 
     public function deletePermission(Request $request)
     {
-        $idPermission = $request->input("id_permission") ?? 0;
+        $idPermission = $request->input("permission_id") ?? 0;
         $this->permissionService->deletePermission($idPermission);
     }
 
     public function addPermissionForRole(Request $request)
     {
-        $roleId = $request->input("id_role");
-        $permissionId = $request->input("id_permission");
+        $roleId = (int)$request?->input("id_role");
+        $permissionId = (int)$request?->input("id_permission");
 
         $this->rolePermissionService->addPermissionForRole($roleId, $permissionId);
     }
 
     public function removePermissionForRole(Request $request)
     {
-        $roleId = $request->input("id_role");
-        $permissionId = $request->input("id_permission");
+        $roleId = (int)$request?->input("id_role");
+        $permissionId = (int)$request?->input("id_permission");
 
         $this->rolePermissionService->removePermissionForRole($roleId, $permissionId);
     }

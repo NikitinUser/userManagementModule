@@ -13,7 +13,7 @@ class UserManagementController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('role:admin');
         $this->roleService = new RoleService();
         $this->userService = new UserService();
     }
@@ -38,17 +38,17 @@ class UserManagementController extends Controller
 
     public function addRoleForUser(Request $request)
     {
-        $roleId = $request->input("id_role");
-        $userId = $request->input("id_user");
+        $roleId = (int)$request->input("id_role");
+        $userId = (int)$request->input("id_user");
 
-        $this->userService->addRoleForUser($roleId, $userId);
+        $this->roleService->addRoleForUser($roleId, $userId);
     }
 
     public function removeRoleForUser(Request $request)
     {
-        $roleId = $request->input("id_role");
-        $userId = $request->input("id_user");
+        $roleId = (int)$request->input("id_role");
+        $userId = (int)$request->input("id_user");
 
-        $this->userService->removeRoleForUser($roleId, $userId);
+        $this->roleService->removeRoleForUser($roleId, $userId);
     }
 }
