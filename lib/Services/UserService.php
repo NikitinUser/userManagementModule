@@ -43,4 +43,18 @@ class UserService
         $userEntity = $this->getUserById($userId);
         $userEntity->delete();
     }
+
+    public function hasRole(int $userId, string $role): bool
+    {
+        $rolesForUser = $this->roleService->getByRoleAndUserId($userId, $role);
+        
+        return (!empty($rolesForUser['role_name'] ?? "") == $role);
+    }
+
+    public function hasPermission(int $userId, string $permission): bool
+    {
+        $permissionsForUser = $this->roleService->getByPermissionAndUserId($userId, $permission);
+        
+        return (!empty($permissionsForUser['permission_name'] ?? "") == $permission);
+    }
 }

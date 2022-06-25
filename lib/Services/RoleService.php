@@ -66,4 +66,14 @@ class RoleService
         $this->role->where('id', $roleId)
             ->delete();
     }
+
+    public function getByRoleAndUserId(int $userId, string $role): ?array
+    {
+        return $this->rolesForUser->getByRoleAndUserId($userId, $role);
+    }
+
+    public function getByPermissionAndUserId(int $userId, string $permission): ?array
+    {
+        return $this->rolesForUser->getByPermissionAndUserId($userId, $permission);
+    }
 }
