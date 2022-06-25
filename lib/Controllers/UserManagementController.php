@@ -41,7 +41,7 @@ class UserManagementController extends Controller
         $roleId = $request->input("id_role");
         $userId = $request->input("id_user");
 
-        $this->userService->addRoleForUser($roleId, $userId);
+        $this->roleService->addRoleForUser($roleId, $userId);
     }
 
     public function removeRoleForUser(Request $request)
@@ -49,6 +49,6 @@ class UserManagementController extends Controller
         $roleId = $request->input("id_role");
         $userId = $request->input("id_user");
 
-        $this->userService->removeRoleForUser($roleId, $userId);
+        $this->roleService->removeRoleForUser($roleId, $userId);
     }
 }

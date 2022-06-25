@@ -18,7 +18,7 @@ class RolesPermissionsService
         $this->permissionsRoles = new PermissionsForRole();
     }
 
-    public function getPermissionsAndRoles()
+    public function getPermissionsAndRoles(): array
     {
         $rolesAndPermissions = $this->permissionsRoles->getAllPermissionsForRoles();
         $permissions = $this->permissionService->getAllPermissions();
@@ -33,7 +33,7 @@ class RolesPermissionsService
         return $response;
     }
 
-    public function addPermissionForRole(int $roleId, int $permissionId)
+    public function addPermissionForRole(int $roleId, int $permissionId): void
     {
         $this->permissionsRoles->create([
             'id_role' => $roleId,
@@ -41,7 +41,7 @@ class RolesPermissionsService
         ]);
     }
 
-    public function removePermissionForRole(int $roleId, int $permissionId)
+    public function removePermissionForRole(int $roleId, int $permissionId): void
     {
         $this->permissionsRoles->where('id_role', '=', $roleId)
             ->where('id_permission', '=', $permissionId)

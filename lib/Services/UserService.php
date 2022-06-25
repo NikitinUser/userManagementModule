@@ -31,7 +31,7 @@ class UserService
         return $this->user->getAll();
     }
 
-    public function getUserById(int $userId)
+    public function getUserById(int $userId): ?UserManagement
     {
         return $this->user
             ->where("id", $userId)
