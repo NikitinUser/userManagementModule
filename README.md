@@ -18,7 +18,7 @@
             в protected $routeMiddleware в классе App\Http\Kernel.php
         </li>
         <li>
-            'permission' => \NikitinUser\userManagementModule\lib\Middleware\PermissionMiddleware::class,<br>
+            2.3) 'permission' => \NikitinUser\userManagementModule\lib\Middleware\PermissionMiddleware::class,<br>
             в protected $routeMiddleware в классе App\Http\Kernel.php
         </li>
     </ul>
