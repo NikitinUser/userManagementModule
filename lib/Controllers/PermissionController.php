@@ -51,9 +51,8 @@ class PermissionController extends Controller
 
     public function addPermission(Request $request)
     {
-        $data = [];
-        $data['permission_name'] = $request?->input('permission_name');
-        $permission = $this->permissionService->addPermission($data);
+        $permissionData = $request->all();
+        $permission = $this->permissionService->addPermission($permissionData);
 
         return json_encode($permission);
     }
@@ -74,16 +73,16 @@ class PermissionController extends Controller
 
     public function addPermissionForRole(Request $request)
     {
-        $roleId = $request->input("id_role");
-        $permissionId = $request->input("id_permission");
+        $roleId = (int)$request?->input("id_role");
+        $permissionId = (int)$request?->input("id_permission");
 
         $this->rolePermissionService->addPermissionForRole($roleId, $permissionId);
     }
 
     public function removePermissionForRole(Request $request)
     {
-        $roleId = $request->input("id_role");
-        $permissionId = $request->input("id_permission");
+        $roleId = (int)$request?->input("id_role");
+        $permissionId = (int)$request?->input("id_permission");
 
         $this->rolePermissionService->removePermissionForRole($roleId, $permissionId);
     }

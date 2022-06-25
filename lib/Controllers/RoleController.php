@@ -52,9 +52,8 @@ class RoleController extends Controller
 
     public function addRole(Request $request)
     {
-        $data = [];
-        $data['role_name'] = $request?->input('role_name');
-        $role = $this->roleService->addRole($data);
+        $roleData = $request->all();
+        $role = $this->roleService->addRole($roleData);
 
         return json_encode($role);
     }
@@ -69,7 +68,7 @@ class RoleController extends Controller
 
     public function deleteRole(Request $request)
     {
-        $roleId = $request->input("role_id") ?? 0;
+        $roleId = (int)$request?->input("role_id");
         $this->roleService->deleteRole($roleId);
     }
 }

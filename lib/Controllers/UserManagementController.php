@@ -38,16 +38,16 @@ class UserManagementController extends Controller
 
     public function addRoleForUser(Request $request)
     {
-        $roleId = $request->input("id_role");
-        $userId = $request->input("id_user");
+        $roleId = (int)$request->input("id_role");
+        $userId = (int)$request->input("id_user");
 
         $this->roleService->addRoleForUser($roleId, $userId);
     }
 
     public function removeRoleForUser(Request $request)
     {
-        $roleId = $request->input("id_role");
-        $userId = $request->input("id_user");
+        $roleId = (int)$request->input("id_role");
+        $userId = (int)$request->input("id_user");
 
         $this->roleService->removeRoleForUser($roleId, $userId);
     }
