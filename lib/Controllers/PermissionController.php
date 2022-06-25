@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use NikitinUser\userManagementModule\lib\Services\PermissionService;
 use NikitinUser\userManagementModule\lib\Services\RolesPermissionsService;
+use Illuminate\Support\Facades\Log;
 
 class PermissionController extends Controller
 {
@@ -36,9 +37,9 @@ class PermissionController extends Controller
 
     public function getPageEditPermission(Request $request)
     {
-        $data = $this->getPermissionData($request);
+        $permission = $this->getPermissionData($request);
 
-        return view('user-management-module::permission.editPermission', compact('data'));
+        return view('user-management-module::permission.editPermission', compact('permission'));
     }
 
     public function getPermissionData(Request $request)
@@ -67,7 +68,7 @@ class PermissionController extends Controller
 
     public function deletePermission(Request $request)
     {
-        $idPermission = $request->input("id_permission") ?? 0;
+        $idPermission = $request->input("permission_id") ?? 0;
         $this->permissionService->deletePermission($idPermission);
     }
 

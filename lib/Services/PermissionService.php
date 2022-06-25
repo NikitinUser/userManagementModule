@@ -21,7 +21,7 @@ class PermissionService
     {
         return $this->permission
             ->where("id", $idPermission)
-            ->get();
+            ->first();
     }
 
 

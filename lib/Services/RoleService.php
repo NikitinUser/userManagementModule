@@ -24,7 +24,7 @@ class RoleService
     {
         return $this->role
             ->where("id", $id)
-            ->get();
+            ->first();
     }
 
     public function getAllRolesForUsers()

@@ -38,9 +38,9 @@ class RoleController extends Controller
 
     public function getPageEditRole(Request $request)
     {
-        $data = $this->getRoleData($request);
+        $role = $this->getRoleData($request);
 
-        return view('user-management-module::role.editRole', compact('data'));
+        return view('user-management-module::role.editRole', compact('role'));
     }
 
     public function getRoleData(Request $request)
@@ -69,7 +69,7 @@ class RoleController extends Controller
 
     public function deleteRole(Request $request)
     {
-        $roleId = $request->input("id_role") ?? 0;
+        $roleId = $request->input("role_id") ?? 0;
         $this->roleService->deleteRole($roleId);
     }
 }
