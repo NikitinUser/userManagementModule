@@ -1,6 +1,6 @@
 # userManagementModule
 Пакет для управления ролями и правами пользователей в Laravel приложении <br><br>
-Работает для Laravel 8<br><br>
+Работает для Laravel 10<br><br>
 
 Установка:<br>
 
