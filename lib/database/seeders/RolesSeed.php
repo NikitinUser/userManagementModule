@@ -1,6 +1,5 @@
 <?php
- 
-namespace Database\Seeders;
+namespace NikitinUser\userManagementModule\lib\database\seeders;
  
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
