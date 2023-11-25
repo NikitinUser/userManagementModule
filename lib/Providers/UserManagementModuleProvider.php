@@ -32,7 +32,7 @@ class UserManagementModuleProvider extends ServiceProvider
             return "<?php endif; ?>";
         });
 
-        $this->loadRoutesFrom(__DIR__ . '/Lib/routes.php');
+        $this->loadRoutesFrom(__DIR__ . '/../routes.php');
 
         $this->publishes([
             __DIR__ . '/../user_management.php' => config_path('user_management.php'),
