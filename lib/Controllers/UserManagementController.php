@@ -1,4 +1,5 @@
 <?php
+
 namespace NikitinUser\UserManagementModule\Lib\Controllers;
 
 use App\Http\Controllers\Controller;

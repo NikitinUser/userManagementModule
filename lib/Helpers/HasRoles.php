@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace NikitinUser\UserManagementModule\Lib\Helpers;
 
 use NikitinUser\UserManagementModule\Lib\Services\UserService;

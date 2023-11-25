@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 use Illuminate\Support\Facades\Route;
 use NikitinUser\UserManagementModule\Lib\Controllers\RoleController;
 use NikitinUser\UserManagementModule\Lib\Controllers\UserManagementController;
