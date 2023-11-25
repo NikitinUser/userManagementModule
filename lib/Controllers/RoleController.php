@@ -1,9 +1,9 @@
 <?php
-namespace NikitinUser\userManagementModule\Lib\Controllers;
+namespace NikitinUser\UserManagementModule\Lib\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use NikitinUser\userManagementModule\Lib\Services\RoleService;
+use NikitinUser\UserManagementModule\Lib\Services\RoleService;
 use Illuminate\Http\JsonResponse;
 
 class RoleController extends Controller
