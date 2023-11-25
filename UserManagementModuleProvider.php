@@ -35,7 +35,7 @@ class UserManagementModuleProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/lib/routes.php');
 
         $this->publishes([
-            __DIR__ . '/../config/user_management.php' => config_path('user_management.php'),
+            __DIR__ . '/user_management.php' => config_path('user_management.php'),
         ]);
     }
 }
