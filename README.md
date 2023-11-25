@@ -11,14 +11,14 @@ Laravel 10<br><br>
             2.1) app.php: <br>
                 'providers' => ServiceProvider::defaultProviders()->merge([<br>
                     ...<br>
-                    \NikitinUser\UserManagementModule\Lib\Providers\UserManagementModuleProvider::class,<br>
+                    NikitinUser\UserManagementModule\Lib\Providers\UserManagementModuleProvider::class,<br>
                 ])->toArray(),<br>
         </li>
         <li>
             2.2) App\Http\Kernel.php <br>
                 protected $middlewareAliases = [<br>
                     ...<br>
-                    'role' => \NikitinUser\userManagementModule\Lib\Middleware\RoleMiddleware::class,<br>
+                    'role' => NikitinUser\userManagementModule\Lib\Middleware\RoleMiddleware::class,<br>
                 ];<br>
         </li>
         <li>
