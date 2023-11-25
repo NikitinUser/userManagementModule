@@ -4,7 +4,7 @@ namespace NikitinUser\UserManagementModule\Lib\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
-use NikitinUser\userManagementModule\Lib\Helpers\HasRoles;
+use NikitinUser\UserManagementModule\Lib\Helpers\HasRoles;
 
 class UserManagementModuleProvider extends ServiceProvider
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace NikitinUser\userManagementModule\Lib\Middleware;
+namespace NikitinUser\UserManagementModule\Lib\Middleware;
 
 use Closure;
-use NikitinUser\userManagementModule\Lib\Helpers\HasRoles;
+use NikitinUser\UserManagementModule\Lib\Helpers\HasRoles;
 
 class RoleMiddleware
 {
