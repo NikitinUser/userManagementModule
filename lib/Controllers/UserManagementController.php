@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use NikitinUser\userManagementModule\lib\Services\RoleService;
 use NikitinUser\userManagementModule\lib\Services\UserService;
+use Illuminate\Http\JsonResponse;
 
 class UserManagementController extends Controller
 {
@@ -18,21 +19,14 @@ class UserManagementController extends Controller
         $this->userService = new UserService();
     }
 
-    public function getPageAllUsers()
+    public function allUsers(): JsonResponse
     {
-        $users = $this->getAllUsers();
-
-        return view('user-management-module::user.allUsers', compact('users'));
+        $users = $this->userService->getAllUsers();
+        return response()->json($users);
     }
 
-    public function getAllUsers()
+    public function removeUser(int $userId)
     {
-        return $this->userService->getAllUsers();
-    }
-
-    public function removeUser(Request $request)
-    {
-        $userId = (int)$request->input("id_user");
         $this->userService->deleteUserById($userId);
     }
 

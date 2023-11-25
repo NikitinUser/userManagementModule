@@ -13,18 +13,21 @@ class CreateRolesForUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('roles_for_user', function (Blueprint $table) {
-            $table->id();
-            
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+        $primaryKey = config('user_management.primary_key');
+        $tableName = config('user_management.table');
 
-            $table->unsignedBigInteger('id_role');
-            $table->foreign('id_role')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
+        if (!Schema::hasTable('roles_for_user')) {
+            Schema::create('roles_for_user', function (Blueprint $table) {
+                $table->id();
+                
+                $table->unsignedBigInteger('id_user');
+                $table->unsignedBigInteger('id_role');
+                $table->timestamps();
 
-            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-        });
+                $table->foreign('id_user')->references($primaryKey)->on($tableName)->onDelete('cascade')->onUpdate('cascade');
+                $table->foreign('id_role')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
+            });
+        }
     }
 
     /**

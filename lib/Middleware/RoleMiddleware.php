@@ -3,7 +3,7 @@
 namespace NikitinUser\userManagementModule\lib\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Log;
+use NikitinUser\userManagementModule\lib\Helpers\HasRoles;
 
 class RoleMiddleware
 {
@@ -15,11 +15,11 @@ class RoleMiddleware
 
         $role = preg_replace("/[^0-9 A-Za-z]/", "", $role);
         if (empty($role)) {
-            return response('Bad role.', 401);
+            return response('Bad role.', 400);
         }
 
-        if (!auth()->user()?->hasRole($role)) {
-            return response('Unavailable.', 401);
+        if (!HasRoles::hasRole(auth()->user()->id, $role)) {
+            return response('Unavailable.', 403);
         }
 
         return $next($request);

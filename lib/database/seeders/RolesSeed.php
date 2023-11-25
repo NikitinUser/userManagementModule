@@ -1,11 +1,9 @@
 <?php
 namespace NikitinUser\userManagementModule\lib\database\seeders;
- 
+
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
- 
+use NikitinUser\userManagementModule\lib\Models\Role;
+
 class RolesSeed extends Seeder
 {
     /**
@@ -13,7 +11,15 @@ class RolesSeed extends Seeder
      */
     public function run(): void
     {
-        DB::table('roles')->insert(['role_name' => 'admin',]);
-        DB::table('roles')->insert(['role_name' => 'user']);
+        $roles = config('user_management.roles');
+
+        foreach ($roles as $role) {
+            $existingRole = Role::where('role_name', $role)->first();
+
+            if (empty($existingRole)) {
+                Role::create(['role_name' => $role]);
+            }
+        }
+        
     }
 }

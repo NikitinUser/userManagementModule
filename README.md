@@ -18,8 +18,7 @@
             в protected $routeMiddleware в классе App\Http\Kernel.php
         </li>
         <li>
-            2.3) 'permission' => \NikitinUser\userManagementModule\lib\Middleware\PermissionMiddleware::class,<br>
-            в protected $routeMiddleware в классе App\Http\Kernel.php
+            2.3) php artisan vendor:publish --provider="NikitinUser\UserManagementModule\UserManagementModuleProvider"
         </li>
     </ul>
 </li>
@@ -32,9 +31,5 @@
 <li>
     4) Запустить сидеры<br>
     php artisan db:seed --class="NikitinUser\\userManagementModule\\lib\\database\\seeders\\RolesSeed"
-</li>
-
-<li>
-    5) Опционально можно добавить роуты к страничкам на свой side-bar @include('user-management-module::sidebar')
 </li>
 </ul>

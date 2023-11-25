@@ -1,60 +1,62 @@
 <?php 
 namespace NikitinUser\userManagementModule\lib\Services;
 
-use NikitinUser\userManagementModule\lib\Models\UserManagement;
+use NikitinUser\userManagementModule\lib\Models\RolesForUser;
 use NikitinUser\userManagementModule\lib\Services\RoleService;
 
 class UserService
 {
-    private UserManagement $user;
     private RoleService $roleService;
 
     public function __construct()
     {
-        $this->user = new UserManagement();
         $this->roleService = new RoleService();
     }
 
-    public function getAllUsersWithRoles(): array
+    /**
+     * @return array
+     */
+    public function getAllUsers(): array
     {
-        $data = [];
+        $columns = ['roles_for_user.id_user', 'roles.role_name'];
+        $columns = array_merge($columns, config('user_management.columns'));
 
-        $data['roles_for_user'] = $this->roleService->getAllRolesForUsers();
-        $data['users'] = $this->getAllUsers();
-        $data['roles'] = $this->roleService->getAllRoles();
+        $table = config('user_management.table');
+        $primaryKey = config('user_management.primaty_key');
 
-        return $data;
+        $usersWithRoles = RolesForUser::select($columns)
+            ->join($table, 'roles_for_user.id_user', '=', $table . '.' . $primaryKey)
+            ->join('roles', 'roles_for_user.id_role', '=', 'roles.id')
+            ->distinct()
+            ->get();
+
+        return $usersWithRoles->groupBy('id_user')->map(function ($roles, $id_user) {
+            return [
+                'id_user' => $id_user,
+                'roles' => $roles->pluck('role_name')->toArray(),
+            ];
+        });
     }
 
-    public function getAllUsers()
+    /**
+     * @param int $id
+     * 
+     * @return void
+     */
+    public function deleteUserById(int $id): void
     {
-        return $this->user->getAll();
-    }
+        $modelClass = config('user_management.model');
+        $model = new $modelClass();
 
-    public function getUserById(int $userId): ?UserManagement
-    {
-        return $this->user
-            ->where("id", $userId)
-            ->first();
-    }
+        $primaryKey = config('user_management.primary_key');
 
-    public function deleteUserById(int $userId): void
-    {
-        $userEntity = $this->getUserById($userId);
-        $userEntity->delete();
+        $model->where($primaryKey, $id)->delete();
     }
 
     public function hasRole(int $userId, string $role): bool
     {
         $rolesForUser = $this->roleService->getByRoleAndUserId($userId, $role);
         
-        return (!empty($rolesForUser['role_name'] ?? "") == $role);
-    }
-
-    public function hasPermission(int $userId, string $permission): bool
-    {
-        $permissionsForUser = $this->roleService->getByPermissionAndUserId($userId, $permission);
-        
-        return (!empty($permissionsForUser['permission_name'] ?? "") == $permission);
+        return (!empty($rolesForUser['role_name'] ?? '') === $role);
     }
 }

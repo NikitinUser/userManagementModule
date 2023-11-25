@@ -6,74 +6,86 @@ use NikitinUser\userManagementModule\lib\Models\RolesForUser;
 
 class RoleService
 {
-    private Role $role;
-    private RolesForUser $rolesForUser;
-
-    public function __construct()
+    /**
+     * @param string $roleName
+     * 
+     * @return Role
+     */
+    public function create(string $roleName): Role
     {
-        $this->role = new Role();
-        $this->rolesForUser = new RolesForUser();
+        return Role::create(['role_name' => $roleName]);
     }
 
-    public function getAllRoles()
+    /**
+     * @return array
+     */
+    public function getAllRoles(): array
     {
-        return $this->role->get();
+        return Role::get()->toArray();
     }
 
-    public function getRoleById(int $id): ?Role
+    /**
+     * @param int $idRole
+     * @param string $roleName
+     * 
+     * @return void
+     */
+    public function updateRole(int $idRole, string $roleName): void
     {
-        return $this->role
-            ->where("id", $id)
-            ->first();
+        Role::where('id', $idRole)->update(['role_name' => $roleName]);
     }
 
-    public function getAllRolesForUsers()
+    /**
+     * @param int $idRole
+     * 
+     * @return void
+     */
+    public function deleteRole(int $idRole): void
     {
-        return $this->rolesForUser->getAllUsersWithRoles();
+        Role::where('id', $idRole)->delete();
     }
 
-    public function addRoleForUser(int $roleId, int $userId): ?RolesForUser
+    /**
+     * @param int $idRole
+     * @param int $userId
+     * 
+     * @return RolesForUser
+     */
+    public function addRoleForUser(int $idRole, int $userId): RolesForUser
     {
-        return $this->rolesForUser->create(
+        return RolesForUser::create(
             [
-                "id_role" => $roleId,
+                "id_role" => $idRole,
                 "id_user" => $userId,
             ]
         );
     }
 
-    public function removeRoleForUser(int $roleId, int $userId): void
+    /**
+     * @param int $idRole
+     * @param int $userId
+     * 
+     * @return void
+     */
+    public function removeRoleForUser(int $idRole, int $userId): void
     {
-        $this->rolesForUser
-            ->where('id_role', '=', $roleId)
+        RolesForUser::where('id_role', '=', $idRole)
             ->where('id_user', '=', $userId)
             ->delete();
     }
 
-    public function addRole(array $roleData): ?Role
+    /**
+     * @param int $userId
+     * @param string $roleName
+     * 
+     * @return void
+     */
+    public function getByRoleAndUserId(int $userId, string $roleName): ?array
     {
-        return $this->role->create($roleData);
-    }
-
-    public function updateRole(int $idRole, string $nameRole): void
-    {
-        $this->role->where('id', $idRole)
-            ->update(['role_name' => $nameRole]);
-    }
-
-    public function deleteRole(int $roleId): void
-    {
-        $this->role->where('id', $roleId)
-            ->delete();
-    }
-
-    public function getByRoleAndUserId(int $userId, string $role): ?array
-    {
-        return $this->rolesForUser->getByRoleAndUserId($userId, $role);
-    }
-
-    public function getByPermissionAndUserId(int $userId, string $permission): ?array
-    {
-        return $this->rolesForUser->getByPermissionAndUserId($userId, $permission);
+        return RolesForUser::join('roles', 'roles_for_user.id_role', '=', 'roles.id')
+            ->where('id_user', $userId)
+            ->where('roles.role_name', $roleName)
+            ->first()
+            ?->toArray();
     }
 }
