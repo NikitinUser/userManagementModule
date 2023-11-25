@@ -26,17 +26,20 @@ class UserService
         $primaryKey = config('user_management.primary_key');
 
         $usersWithRoles = RolesForUser::select($columns)
-            ->join($table, 'roles_for_user.id_user', '=', $table . '.' . $primaryKey)
+            ->join($table, 'roles_for_user.id_user', '=', ($table . '.' . $primaryKey))
             ->join('roles', 'roles_for_user.id_role', '=', 'roles.id')
             ->distinct()
             ->get();
 
-        return $usersWithRoles->groupBy('id_user')->map(function ($roles, $id_user) {
+        $users = $usersWithRoles->groupBy('id_user')->map(function ($roles, $id_user) {
             return [
                 'id_user' => $id_user,
+                'email' => $roles[0]->email,
+                'created_at' => $roles[0]->created_at,
                 'roles' => $roles->pluck('role_name')->toArray(),
             ];
         });
+        return $users->toArray();
     }
 
     /**
