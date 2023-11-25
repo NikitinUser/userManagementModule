@@ -2,7 +2,7 @@
 
 return [
     'model' => \App\Models\User::class,
-    'columns' => ['id', 'email', 'created_at'],
+    'columns' => ['users.id', 'users.email', 'users.created_at'],
     'primary_key' => 'id',
     'table' => 'users',
     'roles' => ['admin', 'user'],

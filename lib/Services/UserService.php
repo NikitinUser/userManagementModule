@@ -58,6 +58,6 @@ class UserService
     {
         $rolesForUser = $this->roleService->getByRoleAndUserId($userId, $role);
         
-        return (!empty($rolesForUser['role_name'] ?? '') === $role);
+        return (($rolesForUser['role_name'] ?? '') === $role);
     }
 }

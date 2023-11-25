@@ -6,7 +6,7 @@ use NikitinUser\UserManagementModule\Lib\Controllers\UserManagementController;
 
 Route::group([
     'middleware' => 'api',
-    'prefix' => 'users'
+    'prefix' => 'api/users'
 ], function () {
     Route::get('', [UserManagementController::class, 'allUsers']);
     Route::delete('/{userId}', [UserManagementController::class, 'removeUser']);
@@ -17,7 +17,7 @@ Route::group([
 
 Route::group([
     'middleware' => 'api',
-    'prefix' => 'roles'
+    'prefix' => 'api/roles'
 ], function () {
     Route::post('', [RoleController::class, 'create']);
     Route::get('', [RoleController::class, 'allRoles']);

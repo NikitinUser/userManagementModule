@@ -18,7 +18,7 @@ Laravel 10<br><br>
             2.2) App\Http\Kernel.php <br>
                 protected $middlewareAliases = [<br>
                     ...<br>
-                    'role' => NikitinUser\UserManagementModule\Lib\Middleware\RoleMiddleware::class,<br>
+                    'role' => \NikitinUser\UserManagementModule\Lib\Middleware\RoleMiddleware::class,<br>
                 ];<br>
         </li>
         <li>
