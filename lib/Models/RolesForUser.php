@@ -1,5 +1,5 @@
 <?php 
-namespace NikitinUser\userManagementModule\Lib\Models;
+namespace NikitinUser\UserManagementModule\Lib\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

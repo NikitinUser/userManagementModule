@@ -12,7 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "NikitinUser\\userManagementModule\\": ""
+            "NikitinUser\\UserManagementModule\\": ""
         }
     },
     "require": {}

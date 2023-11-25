@@ -1,7 +1,7 @@
 <?php 
-namespace NikitinUser\userManagementModule\Lib\Helpers;
+namespace NikitinUser\UserManagementModule\Lib\Helpers;
 
-use NikitinUser\userManagementModule\Lib\Services\UserService;
+use NikitinUser\UserManagementModule\Lib\Services\UserService;
 
 class HasRoles
 {

@@ -1,7 +1,7 @@
 <?php 
 use Illuminate\Support\Facades\Route;
-use NikitinUser\userManagementModule\Lib\Controllers\RoleController;
-use NikitinUser\userManagementModule\Lib\Controllers\UserManagementController;
+use NikitinUser\UserManagementModule\Lib\Controllers\RoleController;
+use NikitinUser\UserManagementModule\Lib\Controllers\UserManagementController;
 
 Route::group([
     'middleware' => 'api',
