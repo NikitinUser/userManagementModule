@@ -1,4 +1,5 @@
 <?php
+
 namespace NikitinUser\UserManagementModule\Lib\database\seeders;
 
 use Illuminate\Database\Seeder;

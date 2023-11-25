@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace NikitinUser\UserManagementModule\Lib\Services;
 
 use NikitinUser\UserManagementModule\Lib\Models\Role;

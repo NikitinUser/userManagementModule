@@ -34,4 +34,8 @@ Laravel 10<br><br>
 <li>
     4) php artisan db:seed --class="NikitinUser\\UserManagementModule\\Lib\\database\\seeders\\RolesSeed"
 </li>
+
+<li>
+    5) php artisan app:set-admin {id_user}
+</li>
 </ul>

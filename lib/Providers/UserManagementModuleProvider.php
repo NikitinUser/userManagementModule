@@ -5,6 +5,7 @@ namespace NikitinUser\UserManagementModule\Lib\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use NikitinUser\UserManagementModule\Lib\Helpers\HasRoles;
+use NikitinUser\UserManagementModule\Lib\Commands\CreateAdminCommand;
 
 class UserManagementModuleProvider extends ServiceProvider
 {
@@ -37,5 +38,11 @@ class UserManagementModuleProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../user_management.php' => config_path('user_management.php'),
         ]);
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                CreateAdminCommand::class,
+            ]);
+        }
     }
 }
