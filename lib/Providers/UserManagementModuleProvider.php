@@ -1,10 +1,10 @@
 <?php
 
-namespace NikitinUser\UserManagementModule;
+namespace NikitinUser\UserManagementModule\Lib\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
-use NikitinUser\userManagementModule\lib\Helpers\HasRoles;
+use NikitinUser\userManagementModule\Lib\Helpers\HasRoles;
 
 class UserManagementModuleProvider extends ServiceProvider
 {
@@ -32,10 +32,10 @@ class UserManagementModuleProvider extends ServiceProvider
             return "<?php endif; ?>";
         });
 
-        $this->loadRoutesFrom(__DIR__.'/lib/routes.php');
+        $this->loadRoutesFrom(__DIR__ . '/Lib/routes.php');
 
         $this->publishes([
-            __DIR__ . '/user_management.php' => config_path('user_management.php'),
+            __DIR__ . '/../user_management.php' => config_path('user_management.php'),
         ]);
     }
 }

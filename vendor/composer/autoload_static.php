@@ -16,7 +16,7 @@ class ComposerStaticInite7433d61f23b172006bc0681731a8ece
     public static $prefixDirsPsr4 = array (
         'Nikitinuser\\UserManagementModule\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src',
+            0 => __DIR__ . '/../..',
         ),
     );
 
