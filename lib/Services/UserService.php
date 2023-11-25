@@ -23,7 +23,7 @@ class UserService
         $columns = array_merge($columns, config('user_management.columns'));
 
         $table = config('user_management.table');
-        $primaryKey = config('user_management.primaty_key');
+        $primaryKey = config('user_management.primary_key');
 
         $usersWithRoles = RolesForUser::select($columns)
             ->join($table, 'roles_for_user.id_user', '=', $table . '.' . $primaryKey)
