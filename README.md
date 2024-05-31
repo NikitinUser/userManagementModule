@@ -11,18 +11,18 @@ Laravel 10<br><br>
             2.1) app.php: <br>
                 'providers' => ServiceProvider::defaultProviders()->merge([<br>
                     ...<br>
-                    NikitinUser\UserManagementModule\Lib\Providers\UserManagementModuleProvider::class,<br>
+                    UserManagementModule\Providers\UserManagementModuleProvider::class,<br>
                 ])->toArray(),<br>
         </li>
         <li>
             2.2) App\Http\Kernel.php <br>
                 protected $middlewareAliases = [<br>
                     ...<br>
-                    'role' => \NikitinUser\UserManagementModule\Lib\Middleware\RoleMiddleware::class,<br>
+                    'role' => \UserManagementModule\Middleware\RoleMiddleware::class,<br>
                 ];<br>
         </li>
         <li>
-            2.3) php artisan vendor:publish --provider="NikitinUser\UserManagementModule\Lib\Providers\UserManagementModuleProvider"
+            2.3) php artisan vendor:publish --provider="UserManagementModule\Providers\UserManagementModuleProvider"
         </li>
     </ul>
 </li>

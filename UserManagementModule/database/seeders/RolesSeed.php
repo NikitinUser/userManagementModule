@@ -1,9 +1,9 @@
 <?php
 
-namespace NikitinUser\UserManagementModule\Lib\database\seeders;
+namespace UserManagementModule\database\seeders;
 
 use Illuminate\Database\Seeder;
-use NikitinUser\UserManagementModule\Lib\Models\Role;
+use UserManagementModule\Models\Role;
 
 class RolesSeed extends Seeder
 {

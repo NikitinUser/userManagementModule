@@ -1,6 +1,6 @@
 <?php
 
-namespace NikitinUser\UserManagementModule\Lib\Models;
+namespace UserManagementModule\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

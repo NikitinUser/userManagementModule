@@ -1,10 +1,10 @@
 <?php
 
-namespace NikitinUser\UserManagementModule\Lib\Commands;
+namespace UserManagementModule\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use NikitinUser\UserManagementModule\Lib\Models\RolesForUser;
+use UserManagementModule\Models\RolesForUser;
 
 class CreateAdminCommand extends Command
 {
