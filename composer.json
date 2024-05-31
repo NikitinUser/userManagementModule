@@ -12,8 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Lib\\": "lib/",
-            "NikitinUser\\UserManagementModule\\": ""
+            "UserManagementModule\\": "./UserManagementModule"
         }
     },
     "require": {}

@@ -1,9 +1,9 @@
 <?php
 
-namespace NikitinUser\UserManagementModule\Lib\Services;
+namespace UserManagementModule\Services;
 
-use NikitinUser\UserManagementModule\Lib\Models\RolesForUser;
-use NikitinUser\UserManagementModule\Lib\Services\RoleService;
+use UserManagementModule\Models\RolesForUser;
+use UserManagementModule\Services\RoleService;
 
 class UserService
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace NikitinUser\UserManagementModule\Lib\Providers;
+namespace UserManagementModule\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
-use NikitinUser\UserManagementModule\Lib\Helpers\HasRoles;
-use NikitinUser\UserManagementModule\Lib\Commands\CreateAdminCommand;
+use UserManagementModule\Helpers\HasRoles;
+use UserManagementModule\Commands\CreateAdminCommand;
 
 class UserManagementModuleProvider extends ServiceProvider
 {
